@@ -3,14 +3,22 @@ const bodyParser = require("body-parser");
 const { itemSchema } = require("./item");
 const mongoose = require("mongoose");
 const _ = require("lodash")
+//mongoose.set('bufferCommands', false);
 
-connectDB();
-async function connectDB() {
+connectDB()
+
+async function connectDB()
+{
+    // await mongoose.connect("mongodb://localhost:27017/todoApp", {family:4}).then(console.log("Connect to db")).catch(err=>console.log(err.message))
+    
     await mongoose
-        .connect("mongodb://127.0.0.1:27017/todo")
+        .connect("mongodb+srv://oluwasheun9721:Samuel97@cluster0.xdahzzg.mongodb.net/todoApp", { family:4 })
         .then(console.log("DB connected"))
         .catch((err) => console.log(err.message));
+
 }
+    
+
 const app = express();
 app.set("view engine", "ejs");
 
@@ -24,6 +32,7 @@ const listSchema = new mongoose.Schema({
 })
 
 const listItem = mongoose.model("listItem", listSchema)
+
 
 app.get("/", function (req, res) {
     get();
@@ -49,9 +58,10 @@ app.get("/", function (req, res) {
 
 app.post("/", function (req, res) {
     const newItem = req.body.newItem;
-    const dbItem = Item.create({
+    const dbItem = new Item({
         name: newItem,
     });
+    dbItem.save()
     res.redirect("/");
 });
 

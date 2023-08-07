@@ -15,22 +15,23 @@
         </h1>
     </div>
     <div class="box">
-        <% for (i in items){ %>
-            <form action="/delete" method="post">
-                <div class="item">
-                    <input type="checkbox" value=<%=items[i]._id %> name="checkbox" onChange="this.form.submit()" >
-                    <input type="hidden" name="name" value=<%=route %> > </input>
-                    <p>
-                        <%= items[i].name %>
-                    </p>
-                </div>
-            </form>
-
-            <%}%>
-                <form class="item" action=<%=route %> method="post">
-                    <input type="text" name="newItem" placeholder="Add new item" autofocus required />
-                    <button class="submit" type="submit">+</button>
+        <% console.log(items) %>
+            <% for (i in items){ %>
+                <form action="/delete" method="post">
+                    <div class="item">
+                        <input type="checkbox" value=<%=items[i]._id %> name="checkbox" onChange="this.form.submit()" >
+                        <input type="hidden" name="name" value=<%=route %> > </input>
+                        <p>
+                            <%= items[i].name %>
+                        </p>
+                    </div>
                 </form>
+
+                <%}%>
+                    <form class="item" action=<%=route %> method="post">
+                        <input type="text" name="newItem" placeholder="Add new item" autofocus required />
+                        <button class="submit" type="submit">+</button>
+                    </form>
     </div>
 
 
